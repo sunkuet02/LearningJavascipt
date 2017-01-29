@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Codeforces API calling test with Angular JS</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<style type="text/css">
+		table, th, td {
+		    border: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript">
+		var app = angular.module("apiCallTesting", []);
+
+		app.controller("apiController" , function($scope, $http) {
+
+			$scope.getContestList = function () {
+				$scope.contestResultTable = true;
+				$scope.userInfoList = false;
+
+				var url = 'http://codeforces.com/api/user.rating?handle='+ $scope.username;
+				$http.get(url).success(function(data) {
+			      $scope.contestResults = data.result;
+			    }).error(function(data, status, headers, config) {
+			        alert("Error : " + status);
+			    })
+			}
+
+			$scope.getUserInfo = function () {
+				$scope.userInfoList = true;
+				$scope.contestResultTable = false;
+
+				var url = 'http://codeforces.com/api/user.info?handles='+ $scope.username;
+				$http.get(url).success(function(data) {
+			      $scope.usersData = data.result;
+			    }).error(function(data, status, headers, config) {
+			        alert("Error : " + status);
+			    })
+			}
+		} );
+	</script>
+
+	<div ng-app="apiCallTesting" ng-controller="apiController">
+		<input ng-model="username">
+		<button ng-click="getContestList()"><b>See Contest Result</b></button>
+		<button ng-click="getUserInfo()"><b>Get User Info</b></button>
+
+		<table ng-show="contestResultTable">
+			<th>Contest Name</th>
+			<th>Contest Place</th>
+			<th>Contest Rating Changes</th>
+			<th>Current Rating</th>
+			<tr ng-repeat="x in contestResults">
+				<td width="50%">{{x.contestName}}</td>
+				<td width="10%">{{x.rank}}</td>
+				<td width="10%">{{x.newRating - x.oldRating}}</td>
+				<td width="10%">{{x.newRating}}</td>
+			</tr>
+		</table>
+		<table ng-show="userInfoList">
+			<tr ng-repeat= "userData in usersData">
+				<td width="25%">
+					<ul >
+						<li>Name : {{userData.firstName}} {{userData.lastName}}</li>
+						<li>Rating : {{userData.rating}} ({{userData.rank}})</li>
+						<li>Max. Rating : {{userData.maxRating}} ({{userData.maxRank}})</li>
+						<li>Email : {{userData.email}}</li>
+						<li>Organization : {{userData.organization}}</li>
+						<li>Address : {{userData.city}}, {{userData.country}} </li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+
+
+	</div>
+</body>
+</html>
