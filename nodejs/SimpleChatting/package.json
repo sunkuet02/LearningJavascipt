@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node ./bin/start.js"
+    "start": "node ./start.js"
   },
   "dependencies": {}
 }
