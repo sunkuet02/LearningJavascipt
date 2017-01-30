@@ -1,0 +1,31 @@
+form {
+    padding: 3px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+form input {
+    border: 0;
+    padding: 10px;
+    width: 80%;
+    margin-right: .5%;
+}
+
+form #button {
+    color:#FFF;
+    background: #2D9F0B;
+    border: none;
+    padding: 10px;
+    width: 9%;
+}
+
+#messages {
+    width: 100%;
+    overflow:auto;
+    margin-bottom: 10%;
+}
+
+#messages td {
+    width: 50%;
+}

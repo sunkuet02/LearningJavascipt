@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Node JS Testing</title>
+    <link rel='stylesheet' href='../styles/style.css' type='text/css'/>
+    <script src="https://cdn.socket.io/socket.io-1.2.0.js"></script>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+    <script src="client/chat.js"></script>
+</head>
+<body>
+    <table id="messages">
+        <span id="notifyUser"></span>
+    </table>
+    <form id="form" action="" onsubmit="return submitfunction();" >
+        <input type="hidden" id="user" value="" />
+        <input id="msg" autocomplete="off" onkeyup="notifyTyping();" placeholder="Type message ...." />
+        <input type="submit" id="button" value="Send"/>
+    </form>
+</body>
+</html>
